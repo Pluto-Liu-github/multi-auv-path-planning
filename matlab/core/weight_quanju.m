@@ -1,12 +1,15 @@
-function [weight_2_quanju_dt] = weight_quanju(Target_quanju, Obstale_quanju, TarNum, MAX_X, MAX_Y, MAX_Z)
-    % ´«Èë²ÎÊıĞÂÔöÁË MAX_Z
+function [weight_2_quanju_dt] = weight_quanju(Target_quanju, Obstale_quanju, TarNum, MAX_X, MAX_Y, MAX_Z, diffusionSteps)
+    if nargin < 7
+        diffusionSteps = 100;
+    end
+    % ä¼ å…¥å‚æ•°æ–°å¢äº† MAX_Z
     
     Et = 20;
     Eo = -20;
-    gamma = 2;  % ±£³Ö½ÏµÍµÄË¥¼õÂÊ£¬·ÀÖ¹´ó¿Õ¼äÄÚÌİ¶ÈÏûÊ§
-    beta = 0.8; % ·ÀÖ¹»îĞÔÖµ±¬Õ¨
+    gamma = 2;  % ä¿æŒè¾ƒä½çš„è¡°å‡ç‡ï¼Œé˜²æ­¢å¤§ç©ºé—´å†…æ¢¯åº¦æ¶ˆå¤±
+    beta = 0.8; % é˜²æ­¢æ´»æ€§å€¼çˆ†ç‚¸
     
-    % ==== ºËĞÄÉıÎ¬ 1£ºÉú³É 3D ¿Õ¼äµÄ 26 ¸öÁÚÓò·½Ïò ====
+    % ==== æ ¸å¿ƒå‡ç»´ 1ï¼šç”Ÿæˆ 3D ç©ºé—´çš„ 26 ä¸ªé‚»åŸŸæ–¹å‘ ====
     neighborhood = [];
     for dx = -1:1
         for dy = -1:1
@@ -17,11 +20,11 @@ function [weight_2_quanju_dt] = weight_quanju(Target_quanju, Obstale_quanju, Tar
         end
     end
     
-    % ==== ºËĞÄÉıÎ¬ 2£º³õÊ¼»¯ÈıÎ¬ÕÅÁ¿ ====
+    % ==== æ ¸å¿ƒå‡ç»´ 2ï¼šåˆå§‹åŒ–ä¸‰ç»´å¼ é‡ ====
     activity_quanju = zeros(MAX_X, MAX_Y, MAX_Z);
     weight_1_quanju = zeros(MAX_X, MAX_Y, MAX_Z);
 
-    % ÕÏ°­Îï¸³Öµ (ÏÖÔÚ´«ÈëµÄ Obstale_quanju ±ØĞëÊÇ 3 ĞĞ: [x; y; z])
+    % éšœç¢ç‰©èµ‹å€¼ (ç°åœ¨ä¼ å…¥çš„ Obstale_quanju å¿…é¡»æ˜¯ 3 è¡Œ: [x; y; z])
     for ijk = 1:size(Obstale_quanju, 2)
         obs_x = Obstale_quanju(1, ijk);
         obs_y = Obstale_quanju(2, ijk);
@@ -30,7 +33,7 @@ function [weight_2_quanju_dt] = weight_quanju(Target_quanju, Obstale_quanju, Tar
         activity_quanju(obs_x, obs_y, obs_z) = -1;
     end
 
-    % Ä¿±êµã¸³Öµ
+    % ç›®æ ‡ç‚¹èµ‹å€¼
     for i = 1:TarNum
         tx = Target_quanju(1,i);
         ty = Target_quanju(2,i);
@@ -39,19 +42,19 @@ function [weight_2_quanju_dt] = weight_quanju(Target_quanju, Obstale_quanju, Tar
         weight_1_quanju(tx, ty, tz) = 1;
     end
     
-    % Éñ¾­ÍøÂç»îĞÔÀ©É¢Ö÷Ñ­»·
-    for j = 1:100 
+    % ç¥ç»ç½‘ç»œæ´»æ€§æ‰©æ•£ä¸»å¾ªç¯
+    for j = 1:diffusionSteps 
         for x = 1:MAX_X
             for y = 1:MAX_Y
-                for z = 1:MAX_Z  % ĞÂÔö Z Öá±éÀú
+                for z = 1:MAX_Z  % æ–°å¢ Z è½´éå†
                     weight_cur = weight_1_quanju(x,y,z);
                     
-                    for n = 1:26 % ±éÀú 26 ¸ö¿Õ¼äÁÚ¾Ó
+                    for n = 1:26 % éå† 26 ä¸ªç©ºé—´é‚»å±…
                         nei_x = x + neighborhood(n,1);
                         nei_y = y + neighborhood(n,2);
                         nei_z = z + neighborhood(n,3);
                         
-                        % 3D ±ß½ç·ÀÍÌÊÉÓëÕÏ°­Îï¼ì²é
+                        % 3D è¾¹ç•Œé˜²åå™¬ä¸éšœç¢ç‰©æ£€æŸ¥
                         if(nei_x<1 || nei_x>MAX_X || nei_y<1 || nei_y>MAX_Y || nei_z<1 || nei_z>MAX_Z)
                             weight_nei = weight_1_quanju(x,y,z); 
                         elseif(activity_quanju(nei_x,nei_y,nei_z) == -1)
@@ -64,7 +67,7 @@ function [weight_2_quanju_dt] = weight_quanju(Target_quanju, Obstale_quanju, Tar
                             weight_cur = 0;
                         end
                         
-                        % 3D ¾àÀëÆ½·½ = dx^2 + dy^2 + dz^2
+                        % 3D è·ç¦»å¹³æ–¹ = dx^2 + dy^2 + dz^2
                         dist = neighborhood(n,1)^2 + neighborhood(n,2)^2 + neighborhood(n,3)^2;
                         Wij = exp(-gamma*dist);
                         weight_cur = weight_cur + Wij * weight_nei;
@@ -72,7 +75,7 @@ function [weight_2_quanju_dt] = weight_quanju(Target_quanju, Obstale_quanju, Tar
                     
                     tmp = weight_cur + (activity_quanju(x,y,z)==1)*Et + (activity_quanju(x,y,z)==-1)*Eo;  
                     
-                    % ±£³ÖÆ½Ô­·âÓ¡½â³ı×´Ì¬
+                    % ä¿æŒå¹³åŸå°å°è§£é™¤çŠ¶æ€
                     if tmp > 0 
                         tmp = beta * tmp; 
                     else 
@@ -84,7 +87,7 @@ function [weight_2_quanju_dt] = weight_quanju(Target_quanju, Obstale_quanju, Tar
         end
     end
     
-    % ==== ºËĞÄĞŞ¸´£ºÇ¿ÖÆ»¹Ô­ 3D ÕÏ°­ÎïµÄ -1 ±êÇ© ====
+    % ==== æ ¸å¿ƒä¿®å¤ï¼šå¼ºåˆ¶è¿˜åŸ 3D éšœç¢ç‰©çš„ -1 æ ‡ç­¾ ====
     for ijk = 1:size(Obstale_quanju, 2)
         obs_x = Obstale_quanju(1, ijk);
         obs_y = Obstale_quanju(2, ijk);

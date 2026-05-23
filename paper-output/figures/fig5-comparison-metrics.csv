@@ -1,0 +1,4 @@
+﻿Method,SuccessRate,TotalPathLength,AveragePathLength,SearchSteps,EquivalentEnergy
+GBSOM,1,100.77,16.80,34,403.10
+A*,1,140.92,23.49,1938,563.67
+APF,1,165.68,27.61,136,662.72

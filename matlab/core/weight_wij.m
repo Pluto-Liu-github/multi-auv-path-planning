@@ -1,10 +1,13 @@
-function [weight_2_dt] = weight_wij(Target_ij, Obstale_ij, TarNum, MAX_X, MAX_Y, MAX_Z)
+function [weight_2_dt] = weight_wij(Target_ij, Obstale_ij, TarNum, MAX_X, MAX_Y, MAX_Z, diffusionSteps)
+    if nargin < 7
+        diffusionSteps = 100;
+    end
     Et = 20; 
     Eo = -20;
     gamma = 5;  
     beta = 0.8; 
     
-    % ==== ∫À–ƒ…˝Œ¨ 1£∫◊‘∂Ø…˙≥… 3D ø’º‰µƒ 26 ∏ˆ¡⁄”Ú∑ΩœÚ ====
+    % ==== Ê†∏ÂøÉÂçáÁª¥ 1ÔºöËá™Âä®ÁîüÊàê 3D Á©∫Èó¥ÁöÑ 26 ‰∏™ÈÇªÂüüÊñπÂêë ====
     neighborhood = [];
     for dx = -1:1
         for dy = -1:1
@@ -15,11 +18,11 @@ function [weight_2_dt] = weight_wij(Target_ij, Obstale_ij, TarNum, MAX_X, MAX_Y,
         end
     end
     
-    % ==== ∫À–ƒ…˝Œ¨ 2£∫»˝Œ¨’≈¡ø≥ı ºªØ ====
+    % ==== Ê†∏ÂøÉÂçáÁª¥ 2Ôºö‰∏âÁª¥Âº†ÈáèÂàùÂßãÂåñ ====
     activity_ij = zeros(MAX_X, MAX_Y, MAX_Z);
     weight_1_ij = zeros(MAX_X, MAX_Y, MAX_Z);
 
-    % ’œ∞≠ŒÔ∏≥÷µ (ºŸ…Ë Obstale_ij œ÷‘⁄ « 3––: [x; y; z])
+    % ÈöúÁ¢çÁâ©ËµãÂÄº (ÂÅáËÆæ Obstale_ij Áé∞Âú®ÊòØ 3Ë°å: [x; y; z])
     for ijk = 1:size(Obstale_ij, 2)
         obs_x = Obstale_ij(1, ijk);
         obs_y = Obstale_ij(2, ijk);
@@ -33,20 +36,20 @@ function [weight_2_dt] = weight_wij(Target_ij, Obstale_ij, TarNum, MAX_X, MAX_Y,
         activity_ij(tx, ty, tz) = 1;
         weight_1_ij(tx, ty, tz) = 1;
         
-        for j = 1:100 % µ¸¥˙¿©…¢
+        for j = 1:diffusionSteps % Ëø≠‰ª£Êâ©Êï£
             for x = 1:MAX_X
                 for y = 1:MAX_Y
-                    for z = 1:MAX_Z  % <== –¬‘ˆ Z ÷·—≠ª∑
+                    for z = 1:MAX_Z  % <== Êñ∞Â¢û Z ËΩ¥Âæ™ÁéØ
                         weight_cur = weight_1_ij(x,y,z);
                         
-                        for n = 1:26 % ±È¿˙ 26 ∏ˆ¡⁄æ”
+                        for n = 1:26 % ÈÅçÂéÜ 26 ‰∏™ÈÇªÂ±Ö
                             nei_x = x + neighborhood(n,1);
                             nei_y = y + neighborhood(n,2);
                             nei_z = z + neighborhood(n,3);
                             
-                            % ‘ΩΩÁº∞’œ∞≠ŒÔ≈–∂œ
+                            % Ë∂äÁïåÂèäÈöúÁ¢çÁâ©Âà§Êñ≠
                             if(nei_x<1 || nei_x>MAX_X || nei_y<1 || nei_y>MAX_Y || nei_z<1 || nei_z>MAX_Z)
-                                weight_nei = weight_1_ij(x,y,z); % ±ﬂΩÁ∑¥…‰
+                                weight_nei = weight_1_ij(x,y,z); % ËæπÁïåÂèçÂ∞Ñ
                             elseif(activity_ij(nei_x,nei_y,nei_z) == -1)
                                 continue; 
                             else
@@ -55,7 +58,7 @@ function [weight_2_dt] = weight_wij(Target_ij, Obstale_ij, TarNum, MAX_X, MAX_Y,
                             
                             if(activity_ij(x,y,z) == -1), weight_cur = 0; end
                             
-                            % 3D æ‡¿Î∆Ω∑Ω = dx^2 + dy^2 + dz^2
+                            % 3D Ë∑ùÁ¶ªÂπ≥Êñπ = dx^2 + dy^2 + dz^2
                             dist = neighborhood(n,1)^2 + neighborhood(n,2)^2 + neighborhood(n,3)^2;
                             Wij = exp(-gamma*dist);
                             weight_cur = weight_cur + Wij * weight_nei;
@@ -69,7 +72,7 @@ function [weight_2_dt] = weight_wij(Target_ij, Obstale_ij, TarNum, MAX_X, MAX_Y,
             end
         end
         
-        % ªπ‘≠’œ∞≠ŒÔ
+        % ËøòÂéüÈöúÁ¢çÁâ©
         for ijk = 1:size(Obstale_ij,2)
             weight_1_ij(Obstale_ij(1,ijk), Obstale_ij(2,ijk), Obstale_ij(3,ijk)) = -1;
         end

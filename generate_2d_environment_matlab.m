@@ -16,7 +16,7 @@ Target_12 = [22, 23, 14,  9, 15, 22;
 Robot_1 = [18,  4,  9, 18, 21;
            10, 11, 14, 15, 15];
 Obstale = [16,16,16,16,16,16,16,16,16,16,16,16,16,16,16,14,13,12,11,11,11,11,11,11,10,9,8,7,7,8,9,10,11,11,11,11,11,12,13,14,20,20,20,20,20,20,21,22,23,24,21,22,23,24;
-            6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,6,6,6,6,7,8,9,10,11,11,11,11,11,16,16,16,16,16,17,18,19,20,20,20,20,6,7,8,18,19,20,8,8,8,8,18,18,18,18];
+            6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,6,6,6,6,7,8,9,10,11,11,11,11,11,16,16,16,16,16,17,18,19,20,20,20,20,6,7,8,18,19,20,8,8,8,8,18,18,18,18];;
 
 V_ocean = 2;
 aerf = zeros(MAX_X, MAX_Y);
@@ -79,12 +79,8 @@ legend([h_obstacle, h_robot, h_target, h_current], ...
     {u([38556 30861 29289]), u([65 85 86 36215 28857]), u([30446 26631 28857]), u([27915 27969 26041 21521])}, ...
     'Location', 'northeastoutside', 'FontName', 'Microsoft YaHei', 'FontSize', 11);
 
-file_name = fullfile(output_dir, 'fig2d-environment-matlab.png');
-try
-    exportgraphics(gcf, file_name, 'Resolution', 300);
-catch
-    saveas(gcf, file_name);
-end
+file_name = fullfile(output_dir, 'fig2d-many-to-many-restored-screenshot-version.png');
+saveas(gcf, file_name);
 close(gcf);
 
 disp(file_name);

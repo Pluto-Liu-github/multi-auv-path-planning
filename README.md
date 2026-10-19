@@ -18,14 +18,18 @@
 </p>
 
 <p align="center">
-  <sub>MATLAB 实现 &nbsp; / &nbsp; 二维与三维场景 &nbsp; / &nbsp; GBSOM · A* · APF</sub>
+  <img src="docs/assets/badge-matlab.svg" alt="MATLAB" height="28">
+  <img src="docs/assets/badge-gbsom.svg" alt="GBSOM" height="28">
+  <img src="docs/assets/badge-dimensions.svg" alt="2D and 3D" height="28">
+  <img src="docs/assets/badge-currents.svg" alt="Ocean Currents" height="28">
+  <img src="docs/assets/badge-baselines.svg" alt="A* and APF" height="28">
 </p>
 
 ---
 
 <a id="overview"></a>
 
-## 项目概览
+## 🌊 项目概览
 
 在复杂水下环境中，多台自主水下航行器（AUV）需要协同分配任务，并在避开障碍物的同时完成多个目标的访问。本项目将神经网络活性场与自组织映射结合，研究任务分配、路径生成和航行代价之间的关系。
 
@@ -35,20 +39,20 @@
 | :---: | :---: | :---: | :---: |
 | **25 × 25 × 25** | **5** | **6** | **GBSOM / A\* / APF** |
 
-### 核心能力
+### ✨ 核心能力
 
 | | 能力 | 实现内容 |
 | :--- | :--- | :--- |
-| **01** | **协同任务分配** | 活性场传播、AUV 竞争分配与多任务关系处理 |
-| **02** | **三维路径规划** | 26 邻域栅格、立体障碍物与不同高度的目标 |
-| **03** | **洋流影响建模** | 分层剪切流、中央射流、垂向扰动及位置漂移 |
-| **04** | **多算法对比** | GBSOM、A*、APF 的路径与任务完成情况统计 |
-| **05** | **航程与能耗分析** | 累计航程、等效能耗与过程曲线 |
-| **06** | **实验图表导出** | 路径图、流场图、障碍物三视图及 CSV 数据 |
+| 🎯 | **协同任务分配** | 活性场传播、AUV 竞争分配与多任务关系处理 |
+| 🧭 | **三维路径规划** | 26 邻域栅格、立体障碍物与不同高度的目标 |
+| 🌊 | **洋流影响建模** | 分层剪切流、中央射流、垂向扰动及位置漂移 |
+| ⚖️ | **多算法对比** | GBSOM、A*、APF 的路径与任务完成情况统计 |
+| 🔋 | **航程与能耗分析** | 累计航程、等效能耗与过程曲线 |
+| 📁 | **实验图表导出** | 路径图、流场图、障碍物三视图及 CSV 数据 |
 
 <a id="gallery"></a>
 
-## 实验展示
+## 🖼️ 实验展示
 
 <table>
   <tr>
@@ -63,25 +67,13 @@
     <td align="center"><sub>任务分配与路径生成</sub></td>
     <td align="center"><sub>流速方向与空间分布</sub></td>
   </tr>
-  <tr>
-    <th>累计等效能耗</th>
-    <th>累计航程</th>
-  </tr>
-  <tr>
-    <td><img src="chapter4_figures/fig4-2-energy-history.png" alt="各 AUV 的累计等效能耗变化" width="100%"></td>
-    <td><img src="chapter4_figures/fig4-3-distance-history.png" alt="各 AUV 的累计航程变化" width="100%"></td>
-  </tr>
-  <tr>
-    <td align="center"><sub>观察不同 AUV 的航行代价</sub></td>
-    <td align="center"><sub>观察任务执行过程中的航程变化</sub></td>
-  </tr>
 </table>
 
 > 图表为仓库内保留的实验示例，横幅为示意图。不同版本的图片、数据与默认参数不一定来自同一次运行，复现实验时请核对参数与数据来源。
 
 <a id="quick-start"></a>
 
-## 快速开始
+## 🚀 快速开始
 
 ### 1 · 准备环境
 
@@ -180,7 +172,7 @@ which Pn -all
 
 <a id="architecture"></a>
 
-## 算法流程
+## 🧠 算法流程
 
 ```mermaid
 flowchart LR
@@ -197,7 +189,7 @@ flowchart LR
 
 主循环负责任务推进；洋流入口在路径更新中加入流场影响。两个入口的基线任务分配与能耗口径存在差异，详见 [实验与复现说明](docs/EXPERIMENTS.md)。
 
-### 代码导航
+### 🗂️ 代码导航
 
 | 模块 | 职责 |
 | --- | --- |
@@ -242,7 +234,7 @@ flowchart LR
 
 <a id="outputs"></a>
 
-## 实验输出
+## 📦 实验输出
 
 | 实验 | 图形输出 | 数据输出 |
 | --- | --- | --- |
@@ -254,7 +246,7 @@ flowchart LR
 
 <a id="reproducibility"></a>
 
-## 复现须知
+## 🔬 复现须知
 
 > [!IMPORTANT]
 > 有／无洋流入口的默认扩散步数和目标到达阈值不同；有洋流入口的 A*、APF 基线没有使用相同洋流能耗模型。直接运行两个入口，不能视为仅改变洋流条件的严格消融实验。
@@ -268,11 +260,11 @@ flowchart LR
 
 <a id="feedback"></a>
 
-## 问题反馈
+## 💬 问题反馈
 
 遇到运行问题，可在 [Issues](https://github.com/Pluto-Liu-github/multi-auv-path-planning/issues) 中提供 MATLAB 版本、运行入口、修改过的参数和完整错误信息。复现实验差异时，请同时注明使用的 MAT 数据和图表来源。
 
-## 许可
+## 📄 许可
 
 如需转载、分发或用于其他项目，请先联系 [仓库作者](https://github.com/Pluto-Liu-github) 确认授权。
 

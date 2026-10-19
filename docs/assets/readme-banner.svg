@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="420" viewBox="0 0 1280 420" role="img" aria-labelledby="title desc">
+  <title id="title">Multi-AUV Task Allocation and Path Planning</title>
+  <desc id="desc">Deep ocean blue banner with an illustrative three-dimensional grid and colored AUV routes. MATLAB, GBSOM, and 2D plus 3D simulation.</desc>
+  <defs>
+    <linearGradient id="ocean" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#07192c"/>
+      <stop offset="1" stop-color="#0c3550"/>
+    </linearGradient>
+    <radialGradient id="light">
+      <stop stop-color="#2dd4bf" stop-opacity=".13"/>
+      <stop offset="1" stop-color="#2dd4bf" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="dots" width="28" height="28" patternUnits="userSpaceOnUse">
+      <circle cx="1" cy="1" r="1" fill="#b7dfef" opacity=".09"/>
+    </pattern>
+  </defs>
+  <rect width="1280" height="420" rx="20" fill="url(#ocean)"/>
+  <rect width="1280" height="420" rx="20" fill="url(#dots)"/>
+  <ellipse cx="990" cy="190" rx="330" ry="270" fill="url(#light)"/>
+  <path d="M0 361 Q210 322 430 361 T850 361 T1280 342" fill="none" stroke="#57c8e5" stroke-opacity=".13"/>
+  <path d="M0 382 Q210 343 430 382 T850 382 T1280 363" fill="none" stroke="#57c8e5" stroke-opacity=".07"/>
+  <g font-family="Segoe UI, Helvetica, Arial, sans-serif">
+    <rect x="60" y="51" width="30" height="3" rx="1.5" fill="#5eead4"/>
+    <text x="102" y="57" fill="#8cbed3" font-size="12" font-weight="600" letter-spacing="2">AUTONOMOUS UNDERWATER VEHICLES</text>
+    <text x="58" y="140" fill="#f0f9ff" font-size="64" font-weight="750" letter-spacing="-2">MULTI-AUV</text>
+    <text x="61" y="191" fill="#d1e6f2" font-size="30" font-weight="400">Task Allocation</text>
+    <text x="61" y="231" fill="#d1e6f2" font-size="30" font-weight="400">&amp; Path Planning</text>
+    <text x="62" y="272" fill="#8cbed3" font-size="15">Cooperative planning in 2D and 3D ocean environments.</text>
+    <g font-size="12" font-weight="600" letter-spacing="1">
+      <rect x="62" y="307" width="104" height="30" rx="6" fill="#163a51" stroke="#2a526b"/>
+      <text x="114" y="327" text-anchor="middle" fill="#c5e6fa">MATLAB</text>
+      <rect x="178" y="307" width="104" height="30" rx="6" fill="#123e44" stroke="#226568"/>
+      <text x="230" y="327" text-anchor="middle" fill="#76ebd4">GBSOM</text>
+      <rect x="294" y="307" width="104" height="30" rx="6" fill="#163a51" stroke="#2a526b"/>
+      <text x="346" y="327" text-anchor="middle" fill="#c5e6fa">2D + 3D</text>
+    </g>
+  </g>
+  <!-- Concept illustration, not a measured trajectory. -->
+  <g fill="none" stroke="#47768b" stroke-width="1">
+    <path d="M730 250 L935 345 L1160 240 L955 145 Z" stroke-opacity=".65"/>
+    <path d="M730 250 V96 L955 12 L1160 96 V240 M730 96 L935 191 L1160 96 M935 191 V345" stroke-opacity=".3" transform="translate(0 35) scale(1 .9)"/>
+    <g stroke-opacity=".22">
+      <path d="M771 269 L996 164 M812 288 L1037 183 M853 307 L1078 202 M894 326 L1119 221"/>
+      <path d="M775 229 L980 324 M820 208 L1025 303 M865 187 L1070 282 M910 166 L1115 261"/>
+      <path d="M730 200 L935 295 L1160 190 M730 150 L935 245 L1160 140 M775 116 V229 M820 137 V250 M865 158 V271 M980 170 V324 M1025 149 V303 M1070 128 V282 M1115 107 V261"/>
+    </g>
+  </g>
+  <g fill="#224456" stroke="#658298" stroke-opacity=".4" stroke-width="1">
+    <path d="M925 260 L965 278 L965 160 L925 142 Z"/>
+    <path d="M965 278 L1004 260 L1004 142 L965 160 Z" fill="#19384c"/>
+    <path d="M925 142 L965 160 L1004 142 L964 124 Z" fill="#2c5266"/>
+    <path d="M1045 241 L1071 253 L1071 198 L1045 186 Z"/>
+    <path d="M1071 253 L1097 241 L1097 186 L1071 198 Z" fill="#19384c"/>
+    <path d="M1045 186 L1071 198 L1097 186 L1071 174 Z" fill="#2c5266"/>
+  </g>
+  <g fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M778 253 L833 232 L885 211 L906 183 L905 130 L945 100 L1032 137" stroke="#56c5f5"/>
+    <path d="M799 264 L853 244 L896 263 L930 292 L996 265 L1030 215 L1134 170" stroke="#5eead4"/>
+    <path d="M820 274 L866 255 L901 232 L908 201 L890 159 L853 139" stroke="#fbbf69"/>
+    <path d="M841 284 L884 302 L946 323 L1036 282 L1124 245" stroke="#a5a3ff"/>
+    <path d="M862 294 L909 310 L953 292 L1019 320" stroke="#f39db7"/>
+  </g>
+  <g stroke="#0b2337" stroke-width="2">
+    <circle cx="778" cy="253" r="6" fill="#56c5f5"/>
+    <circle cx="799" cy="264" r="6" fill="#5eead4"/>
+    <circle cx="820" cy="274" r="6" fill="#fbbf69"/>
+    <circle cx="841" cy="284" r="6" fill="#a5a3ff"/>
+    <circle cx="862" cy="294" r="6" fill="#f39db7"/>
+  </g>
+  <g fill="#0d2b40" stroke-width="2">
+    <circle cx="1032" cy="137" r="6" stroke="#56c5f5"/>
+    <circle cx="1134" cy="170" r="6" stroke="#5eead4"/>
+    <circle cx="853" cy="139" r="6" stroke="#fbbf69"/>
+    <circle cx="1124" cy="245" r="6" stroke="#a5a3ff"/>
+    <circle cx="1019" cy="320" r="6" stroke="#f39db7"/>
+    <circle cx="945" cy="100" r="6" stroke="#56c5f5"/>
+  </g>
+  <text x="951" y="385" text-anchor="middle" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="11" fill="#82adc2" letter-spacing="2">PLAN · ALLOCATE · NAVIGATE</text>
+</svg>

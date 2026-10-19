@@ -1,0 +1,59 @@
+# Curated code/data repository: exclude local thesis and working materials.
+/*
+!/.gitignore
+!/.gitattributes
+!/README.md
+!/docs/
+!/matlab/
+!/*.m
+!/chapter4_figures/
+!/current_figures/
+!/comparison_current_figures/
+!/paper-output/
+
+# Local provenance notes.
+/docs/HISTORY.md
+/docs/history-manifest.json
+
+# Backups are imported as revisions, not duplicate working files.
+**/*before-*
+/tmp_*.m
+**/*.asv
+**/*.log
+**/__pycache__/
+**/~$*
+
+# MATLAB directories contain source only.
+/matlab/**/.*
+/matlab/**/*.mat
+/matlab/**/*.png
+/matlab/**/*.jpg
+/matlab/**/*.jpeg
+/matlab/**/*.fig
+/matlab/**/*.txt
+
+# Selected display figures.
+/chapter4_figures/*
+!/chapter4_figures/fig4-1-3d-gbsom-path.png
+!/chapter4_figures/fig4-2-energy-history.png
+!/chapter4_figures/fig4-3-distance-history.png
+/current_figures/*
+!/current_figures/fig4-1-3d-gbsom-path.png
+!/current_figures/fig4-2-energy-history.png
+!/current_figures/fig4-3-distance-history.png
+!/current_figures/fig-current-field-3d.png
+/comparison_current_figures/*
+!/comparison_current_figures/fig5-1-gbsom-path.png
+!/comparison_current_figures/fig5-2-astar-path.png
+!/comparison_current_figures/fig5-3-apf-path.png
+!/comparison_current_figures/fig5-4-metric-bars.png
+
+# Historical input snapshots and selected tables.
+/paper-output/*
+!/paper-output/figures/
+/paper-output/figures/*
+!/paper-output/figures/fig3-2d-current-metrics.mat
+!/paper-output/figures/fig3-2d-no-current-metrics.mat
+!/paper-output/figures/fig3-2d-current-planned-run.mat
+!/paper-output/figures/fig5-comparison-metrics.csv
+!/paper-output/figures/fig5-task-pairs.csv

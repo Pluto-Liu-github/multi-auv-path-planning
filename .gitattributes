@@ -1,0 +1,4 @@
+# Preserve exact historical bytes, including mixed legacy source encodings.
+* -text
+*.png binary
+*.mat binary
